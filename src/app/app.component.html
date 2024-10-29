@@ -1,4 +1,23 @@
-
-<div *ngFor="let item of courses; let i =index;">
-    <course-card (courseSelected)="onCourseSelected($event)" [course]="item"></course-card>
+<!--
+<div *ngFor="let item of courses; let i = index;">
+    <course-card [index]="i" (courseSelected)="onCourseSelected($event)" [course]="item"></course-card>
 </div>
+-->
+@for(item of courses; track item.id;let index = $index;let even = $even;let first = $first; let last = $last){
+    <div *ngIf="first" ngClass="first ? 'course-is-first' : ''">
+        <h1 style="display:flex;justify-content: center;">Courses:</h1>
+    </div>
+        <div [ngClass]="even ? 'course-is-even' : ''">      
+            <course-card [index]="index" 
+            (courseSelected)="onCourseSelected($event)" 
+            [course]="item"
+            [class.course-is-even]="even"            
+            [class.course-is-last]="last"    
+            ></course-card>
+        </div>
+    
+}
+@empty {
+    <h1>No courses available</h1>
+
+}

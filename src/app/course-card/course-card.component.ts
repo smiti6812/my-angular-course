@@ -13,12 +13,11 @@ import { Course } from '../interfaces/course';
 export class CourseCardComponent {
   @Input() course!: Course;
   @Input() Courses!: any [];
-  @Output('courseSelected')
-  courseEmitter = new EventEmitter<Course>();
+  @Input() index!: number;
+  @Output('courseSelected') courseEmitter = new EventEmitter<Course>();
+
   onCourseViewed() {
-
     this.courseEmitter.emit(this.course);
-
 }
 
 }
